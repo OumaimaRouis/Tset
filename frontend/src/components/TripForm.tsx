@@ -12,6 +12,8 @@ export default function TripForm({ onTripCreated }: TripFormProps) {
     dropoff_location: "",
     current_cycle_hours: 0
   });
+  const API_URL = import.meta.env.VITE_API_URL;
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -21,7 +23,7 @@ export default function TripForm({ onTripCreated }: TripFormProps) {
     e.preventDefault();
     try {
       // POST trip
-      const res = await axios.post("http://127.0.0.1:8000/api/trips/", form);
+      const res = await axios.post(`${API_URL}/api/trips/`, form);
       onTripCreated(res.data); // pass created trip to parent
     } catch (err) {
       console.error(err);

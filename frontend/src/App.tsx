@@ -6,7 +6,6 @@ interface Trip {
   current_cycle_hours: number;
 }
 
-
 interface RouteData {
   start: string;
   pickup: string;
@@ -29,21 +28,25 @@ import TripForm from "./components/TripForm";
 import MapWithRoute from "./components/TripMap";
 
 export default function App() {
-  const [trip, setTrip] = useState<Trip | null>(null);
+  const [, setTrip] = useState<Trip | null>(null);
   const [route, setRoute] = useState<RouteData | null>(null);
   const [logs, setLogs] = useState<LogData | null>(null);
+
+  // ✅ Use the environment variable
+  const API_URL = import.meta.env.VITE_API_URL;
+
 
   const handleTripCreated = async (tripData: Trip) => {
     setTrip(tripData);
 
     const r = await axios.get<RouteData>(
-      `http://127.0.0.1:8000/api/trips/${tripData.id}/route/`
+      `${API_URL}/api/trips/${tripData.id}/route/`
     );
     console.log("Route response:", r.data);
     setRoute(r.data);
 
     const l = await axios.get<LogData>(
-      `http://127.0.0.1:8000/api/trips/${tripData.id}/logs/`
+      `${API_URL}/api/trips/${tripData.id}/logs/`
     );
     setLogs(l.data);
   };
@@ -58,7 +61,7 @@ export default function App() {
           <h2>Route Info</h2>
           <p>Distance: {route.distance_km} km</p>
           <p>Duration: {route.duration_hours} hrs</p>
-          {route && <MapWithRoute route={route}/>}
+          {route && <MapWithRoute route={route} />}
         </>
       )}
 
