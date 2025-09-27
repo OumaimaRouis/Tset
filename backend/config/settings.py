@@ -37,7 +37,8 @@ ALLOWED_HOSTS = [
     
     "tset-production.up.railway.app",
     "127.0.0.1",
-    "localhost"
+    "localhost",
+    ".koyeb.app",
 
 
 ]
