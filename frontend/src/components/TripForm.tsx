@@ -10,7 +10,7 @@ export default function TripForm({ onTripCreated }: TripFormProps) {
     current_location: "",
     pickup_location: "",
     dropoff_location: "",
-    current_cycle_hours: 0
+    cycle_hours_used: 0
   });
   const API_URL = import.meta.env.VITE_API_URL;
 console.log("API_URL =", API_URL);
@@ -25,7 +25,7 @@ console.log("API_URL =", API_URL);
   try {
     const payload = {
       ...form,
-      current_cycle_hours: Number(form.current_cycle_hours)
+      current_cycle_hours: Number(form.cycle_hours_used)
     };
     console.log("Payload sent to backend:", payload);
 
@@ -43,7 +43,7 @@ console.log("API_URL =", API_URL);
       <input name="current_location" placeholder="Current Location" onChange={handleChange} />
       <input name="pickup_location" placeholder="Pickup Location" onChange={handleChange} />
       <input name="dropoff_location" placeholder="Dropoff Location" onChange={handleChange} />
-      <input name="current_cycle_hours" type="number" placeholder="Current Cycle Hours" onChange={handleChange} />
+      <input name="cycle_hours_used" type="number" placeholder="Cycle Hours Used" onChange={handleChange} />
       <button type="submit">Create Trip</button>
     </form>
   );
