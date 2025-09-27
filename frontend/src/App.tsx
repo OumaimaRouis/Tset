@@ -34,6 +34,8 @@ export default function App() {
 
   // ✅ Use the environment variable
   const API_URL = import.meta.env.VITE_API_URL;
+console.log("API_URL =", API_URL);
+console.log("ENV:", import.meta.env);
 
 
   const handleTripCreated = async (tripData: Trip) => {

@@ -13,6 +13,7 @@ export default function TripForm({ onTripCreated }: TripFormProps) {
     current_cycle_hours: 0
   });
   const API_URL = import.meta.env.VITE_API_URL;
+console.log("API_URL =", API_URL);
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,16 +21,22 @@ export default function TripForm({ onTripCreated }: TripFormProps) {
   };
 
   const handleSubmit = async (e:React.FormEvent) => {
-    e.preventDefault();
-    try {
-      // POST trip
-      const res = await axios.post(`${API_URL}/api/trips/`, form);
-      onTripCreated(res.data); // pass created trip to parent
-    } catch (err) {
-      console.error(err);
-      alert("Trip creation failed");
-    }
-  };
+  e.preventDefault();
+  try {
+    const payload = {
+      ...form,
+      current_cycle_hours: Number(form.current_cycle_hours)
+    };
+    console.log("Payload sent to backend:", payload);
+
+    const res = await axios.post(`${API_URL}/api/trips/`, payload);
+    onTripCreated(res.data);
+  } catch (err) {
+    console.error(err);
+    alert("Trip creation failed");
+  }
+  
+};
 
   return (
     <form onSubmit={handleSubmit} className="space-y-2">
