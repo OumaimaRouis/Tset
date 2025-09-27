@@ -17,8 +17,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
-ORS_API_KEY = os.getenv("ORS_API_KEY")
-ORS_URL = os.getenv("ORS_URL", "https://api.openrouteservice.org/v2/directions/driving-car")  # valeur par défaut
+ORS_API_KEY = os.getenv("ORS_API_KEY", "")
+ORS_URL = os.getenv("ORS_URL", "https://api.openrouteservice.org/v2/directions/driving-car", "")  # valeur par défaut
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
